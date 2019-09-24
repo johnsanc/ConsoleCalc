@@ -17,9 +17,13 @@ namespace Program
                 double tempNum;
                 if (double.TryParse(unprocessedNums[i], out tempNum))
                 {
-                    if (tempNum>= 0)
+                    if (tempNum>= 0 && tempNum <= 1000)
                     {
                         processedValues.Add(tempNum);
+                    }
+                    else if (tempNum > 1000)
+                    {
+                        processedValues.Add(0);
                     } 
                     else if (tempNum < 0)
                     {

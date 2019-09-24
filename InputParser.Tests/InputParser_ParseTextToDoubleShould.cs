@@ -79,5 +79,17 @@ namespace InputParser.Tests
                 Program.InputParser.ParseTextToDouble(values)
             );
         }
+
+        [TestMethod]
+        public void ShouldIgnoreNumbersGreaterThanOneThousand()
+        {
+            string numbers = "2,1001,6";
+            List<double> target = new List<double> { 2, 0, 6 };
+
+            var actual = Program.InputParser.ParseTextToDouble(numbers);
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
     }
 }
