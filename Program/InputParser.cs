@@ -6,7 +6,7 @@ namespace Program
         public static List<double> ParseTextToDouble(string text)
         {
             string[] unprocessedNums = text.Split(',');
-            List<double> processedValues = new List<double>(2);
+            List<double> processedValues = new List<double>();
 
             for(var i = 0; i < unprocessedNums.Length; i++)
             {

@@ -43,5 +43,17 @@ namespace InputParser.Tests
 
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void ShouldComputeListsWithMoreThanTwoItems()
+        {
+            string numbers = "1,2,3,4,5";
+            List<double> target = new List<double> { 1, 2, 3, 4, 5 };
+
+            var actual = Program.InputParser.ParseTextToDouble(numbers);
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
     }
 }
