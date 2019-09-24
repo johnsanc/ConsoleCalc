@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ConsoleCLI;
 
 namespace Program
@@ -11,19 +12,28 @@ namespace Program
                 "Add",
                 "Quit"
             );
-
-            mainMenu.ShowMenuOptions();
-            var selection = Console.ReadKey();
-
-            switch(selection.KeyChar)
+            
+            bool flag = true;
+            while(flag)
             {
-                case '1':
-                    Console.WriteLine();
-                    Console.WriteLine("Selected Add");
-                    break;
-                default:
-                    Console.WriteLine();
-                    break;
+                Console.WriteLine();
+                mainMenu.ShowMenuOptions();
+                ConsoleKeyInfo selection = Console.ReadKey();
+                switch(selection.KeyChar)
+                {
+                    case '1':
+                        Console.WriteLine();
+                        Console.Write("Please enter two numbers to add: ");
+                        string input = Console.ReadLine();
+                        List<double> nums = InputParser.ParseTextToDouble(input);
+                        double result = Operation.Add(nums);
+                        Console.WriteLine($"Result: {result:N2}\n");
+                        break;
+                    default:
+                        flag = false;
+                        Console.WriteLine();
+                        break;
+                }
             }
         }
     }

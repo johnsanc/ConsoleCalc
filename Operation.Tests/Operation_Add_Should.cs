@@ -17,5 +17,27 @@ namespace Operation.Tests
 
             Assert.AreEqual(target, result);
         }
+
+        [TestMethod]
+        public void AddShould_ReturnZeroWithEmptyInput()
+        {
+            var numbers = new List<double> { };
+            var target = 0.0;
+
+            var result = Program.Operation.Add(numbers);
+
+            Assert.AreEqual(target, result);
+        }
+
+        [TestMethod]
+        public void AddShould_ReturnSameNumberWithOneInput()
+        {
+            var numbers = new List<double> { 1.0 };
+            var target = 1.0;
+
+            var result = Program.Operation.Add(numbers);
+
+            Assert.AreEqual(target, result);
+        }
     }
 }

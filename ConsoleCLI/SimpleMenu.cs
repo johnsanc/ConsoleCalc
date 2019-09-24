@@ -25,7 +25,7 @@ namespace ConsoleCLI
                 Console.WriteLine($"{counter}. " + option);
                 counter++;
             }
-            Console.Write("Plese select and option: ");
+            Console.Write("Plese select an option: ");
         }
     }
 }
