@@ -58,8 +58,8 @@ namespace InputParser.Tests
         }
 
         [DataTestMethod]
-        [DataRow("1,\\n2")]
-        [DataRow("1\\n2")]
+        [DataRow("1,\n2")]
+        [DataRow("1\n2")]
         public void ShouldReturnCorrectListWithNewlineDelim(string value)
         {
             List<double> target = new List<double> { 1, 2 };
@@ -71,7 +71,7 @@ namespace InputParser.Tests
         }
 
         [DataTestMethod]
-        [DataRow("1,2\\n-13")]
+        [DataRow("1,2\n-13")]
         [DataRow("-50,40,-32,-14, -5")]
         public void ShouldThrowExceptionIfNegativeNumbersFound(string values)
         {
@@ -87,6 +87,30 @@ namespace InputParser.Tests
             List<double> target = new List<double> { 2, 6 };
 
             var actual = Program.InputParser.ParseTextToDouble(numbers);
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ShouldComputeListsWithOneCustomDelimiter()
+        {
+            string numbers = "//;\n2;5";
+            List<double> target = new List<double> { 2, 5 };
+
+            List<double> actual = Program.InputParser.ParseTextToDouble(numbers, ";");
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ShouldComputeListsWithOneCustomDelimiterOfVariableLength()
+        {
+            string numbers = "//[***]\n11***22***33";
+            List<double> target = new List<double> { 11, 22, 33 };
+
+            List<double> actual = Program.InputParser.ParseTextToDouble(numbers, "***");
             bool result = Enumerable.SequenceEqual(target, actual);
 
             Assert.IsTrue(result);

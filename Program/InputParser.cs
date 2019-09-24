@@ -8,13 +8,15 @@ namespace Program
     {
         public static List<double> ParseTextToDouble(string text, params string[] options)
         {
-            string basePattern = @"([^\s,\\n]*)";
-            Regex splitter = new Regex(basePattern);
-            var unprocessedNums = splitter.Split(text).Where(s => s != String.Empty);
-            
-            string[] unprocessedNumsArr = unprocessedNums.ToArray();
-            List<double> negatives = new List<double>();
+            List<string> delimList = new List<string> { "\\n", "\n", ",", " " };
+            foreach(var delim in options)
+            {
+                delimList.Add(delim);
+            }
+            string[] delimeters = delimList.ToArray();
 
+            string[] unprocessedNumsArr = text.Split(delimeters, StringSplitOptions.RemoveEmptyEntries);
+            List<double> negatives = new List<double>();
             List<double> processedValues = new List<double>();
 
             for(var i = 0; i < unprocessedNumsArr.Length; i++)
@@ -26,19 +28,11 @@ namespace Program
                     {
                         processedValues.Add(tempNum);
                     }
-                    // else if (tempNum > 1000)
-                    // {
-                    //     processedValues.Add(0);
-                    // } 
                     else if (tempNum < 0)
                     {
                         negatives.Add(tempNum);
                     }
                 }
-                // else
-                // {
-                //     processedValues.Add(0);
-                // }
             }
 
             if (negatives.Count > 0)
