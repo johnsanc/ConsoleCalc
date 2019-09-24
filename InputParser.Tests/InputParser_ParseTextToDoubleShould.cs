@@ -46,7 +46,7 @@ namespace InputParser.Tests
         }
 
         [TestMethod]
-        public void ShouldComputeListsWithMoreThanTwoItems()
+        public void ShouldReturnListsWithMoreThanTwoItems()
         {
             string numbers = "1,2,3,4,5";
             List<double> target = new List<double> { 1, 2, 3, 4, 5 };
@@ -93,7 +93,7 @@ namespace InputParser.Tests
         }
 
         [TestMethod]
-        public void ShouldComputeListsWithOneCustomDelimiter()
+        public void ShouldReturnListWithOneCustomDelimiter()
         {
             string numbers = "//;\n2;5";
             List<double> target = new List<double> { 2, 5 };
@@ -105,12 +105,24 @@ namespace InputParser.Tests
         }
 
         [TestMethod]
-        public void ShouldComputeListsWithOneCustomDelimiterOfVariableLength()
+        public void ShouldReturnListWithOneCustomDelimiterOfVariableLength()
         {
             string numbers = "//[***]\n11***22***33";
             List<double> target = new List<double> { 11, 22, 33 };
 
             List<double> actual = Program.InputParser.ParseTextToDouble(numbers, "***");
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ShouldReturnListWithMultipleCustomDelimiterOfVariableLength()
+        {
+            string numbers = "//[*][!!][r9r]\n11r9r22*33!!44";
+            List<double> target = new List<double> { 11, 22, 33, 44 };
+
+            List<double> actual = Program.InputParser.ParseTextToDouble(numbers, "*", "!!", "r9r");
             bool result = Enumerable.SequenceEqual(target, actual);
 
             Assert.IsTrue(result);
