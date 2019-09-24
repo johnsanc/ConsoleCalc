@@ -18,7 +18,7 @@ namespace Program
             {
                 Console.WriteLine();
                 mainMenu.ShowMenuOptions();
-                ConsoleKeyInfo selection = Console.ReadKey();
+                ConsoleKeyInfo selection = Console.ReadKey();               
                 switch(selection.KeyChar)
                 {
                     case '1':
@@ -27,7 +27,6 @@ namespace Program
                         string input = Console.ReadLine();
                         try 
                         {
-
                             List<double> nums = InputParser.ParseTextToDouble(input);
                             double result = Operation.Add(nums);
                             Console.WriteLine($"Result: {result:N2}\n");

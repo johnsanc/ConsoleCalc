@@ -25,7 +25,7 @@ namespace InputParser.Tests
         public void ShouldReplaceInvalidStringWithZeroInList()
         {
             string numbers = "1,abc";
-            List<double> target = new List<double> { 1, 0 };
+            List<double> target = new List<double> { 1 };
 
             var actual = Program.InputParser.ParseTextToDouble(numbers);
             bool result = Enumerable.SequenceEqual(target, actual);
@@ -37,7 +37,7 @@ namespace InputParser.Tests
         public void ShouldReturnZeroFilledListWithAllInvalidString()
         {
             string numbers = "one,abc";
-            List<double> target = new List<double> { 0, 0 };
+            List<double> target = new List<double> { };
 
             var actual = Program.InputParser.ParseTextToDouble(numbers);
             bool result = Enumerable.SequenceEqual(target, actual);
@@ -84,7 +84,7 @@ namespace InputParser.Tests
         public void ShouldIgnoreNumbersGreaterThanOneThousand()
         {
             string numbers = "2,1001,6";
-            List<double> target = new List<double> { 2, 0, 6 };
+            List<double> target = new List<double> { 2, 6 };
 
             var actual = Program.InputParser.ParseTextToDouble(numbers);
             bool result = Enumerable.SequenceEqual(target, actual);
