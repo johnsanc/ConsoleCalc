@@ -55,5 +55,18 @@ namespace InputParser.Tests
 
             Assert.IsTrue(result);
         }
+
+        [DataTestMethod]
+        [DataRow("1,\\n2")]
+        [DataRow("1\\n2")]
+        public void ShouldReturnCorrectListWithNewlineDelim(string value)
+        {
+            List<double> target = new List<double> { 1, 2 };
+
+            var actual = Program.InputParser.ParseTextToDouble(value);
+            bool result = Enumerable.SequenceEqual(target, actual);
+
+            Assert.IsTrue(result);
+        }
     }
 }

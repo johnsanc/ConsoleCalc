@@ -1,11 +1,14 @@
 using System.Collections.Generic;
+using System;
 namespace Program
 {
     public static class InputParser
     {
         public static List<double> ParseTextToDouble(string text)
         {
-            string[] unprocessedNums = text.Split(',');
+            string[] delimeters = new string[] { ",", "\\n" };
+            string[] unprocessedNums = text.Split(delimeters, StringSplitOptions.RemoveEmptyEntries);
+
             List<double> processedValues = new List<double>();
 
             for(var i = 0; i < unprocessedNums.Length; i++)
