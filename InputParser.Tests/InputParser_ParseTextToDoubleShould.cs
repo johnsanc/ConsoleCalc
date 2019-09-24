@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Program;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace InputParser.Tests
 {
@@ -67,6 +68,16 @@ namespace InputParser.Tests
             bool result = Enumerable.SequenceEqual(target, actual);
 
             Assert.IsTrue(result);
+        }
+
+        [DataTestMethod]
+        [DataRow("1,2\\n-13")]
+        [DataRow("-50,40,-32,-14, -5")]
+        public void ShouldThrowExceptionIfNegativeNumbersFound(string values)
+        {
+            Assert.ThrowsException<Exception>(() => 
+                Program.InputParser.ParseTextToDouble(values)
+            );
         }
     }
 }

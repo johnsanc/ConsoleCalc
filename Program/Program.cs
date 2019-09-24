@@ -25,9 +25,17 @@ namespace Program
                         Console.WriteLine();
                         Console.Write("Please enter two numbers to add: ");
                         string input = Console.ReadLine();
-                        List<double> nums = InputParser.ParseTextToDouble(input);
-                        double result = Operation.Add(nums);
-                        Console.WriteLine($"Result: {result:N2}\n");
+                        try 
+                        {
+
+                            List<double> nums = InputParser.ParseTextToDouble(input);
+                            double result = Operation.Add(nums);
+                            Console.WriteLine($"Result: {result:N2}\n");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     default:
                         flag = false;
